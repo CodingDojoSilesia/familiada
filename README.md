@@ -19,7 +19,8 @@ Please read the whole description before you start working.
 1. The points in round 4 are doubled. Starting round 5 the points are tripled.
 1. Each round consists of one question, which has several answers.
 1. The answers points vary on their previously surveyed popularity.
-1. You can find the questions and answers in LINKME
+1. You can find the questions and answers in the [data.json](src/data.json) in the src 
+   directory.
 
 ##### The round scenario
 1. The selected team members give their answers to the question.
@@ -37,7 +38,7 @@ Please read the whole description before you start working.
 TODO: Describe the Web Speech API
 
 ### The manual
-#####Installation
+##### Installation
 1. Be sure you have your node.js updated. The use of [n](https://github.com/tj/n) 
    is advised. Just be sure to restart your terminal, should you change the node version.
 1. `npm install`
