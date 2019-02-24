@@ -86,6 +86,17 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/scripts/board.js":
+/*!******************************!*\
+  !*** ./src/scripts/board.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("const answerFieldFill = '... ... ... ... ... ... ... ... ... ... ... ... ...';\n/**\n * @param {int} number\n * @param {string} text\n * @param {int} points\n */\n\nfunction setAnswer(number, text, points) {\n  const textContainer = document.querySelector(`[data-answer-num=\"${number}\"] .text`);\n  const pointsContainer = document.querySelector(`[data-answer-num=\"${number}\"] .points`);\n  textContainer.innerHTML = fillAnswerField(text);\n  pointsContainer.innerHTML = points;\n}\n/**\n * @param {string} text\n * @returns {string}\n */\n\n\nfunction fillAnswerField(text) {\n  const fillLength = answerFieldFill.length;\n\n  if (fillLength < text.length) {\n    return text.substring(0, text.length - 3) + '...';\n  } else {\n    return text + answerFieldFill.substring(text.length);\n  }\n}\n/**\n * @param {TEAMS} team\n * @param {int} points\n */\n\n\nfunction setPoints(team, points) {\n  document.querySelector(`.${team}-team .team-points`).innerHTML = points.toString();\n}\n/**\n * @param {TEAMS} team\n * @param {int} errorCnt\n */\n\n\nfunction setErrors(team, errorCnt) {\n  const errorIndicators = document.querySelectorAll(`.${team}-team .fail`);\n\n  for (let i = 0; i < errorIndicators.length; i++) {\n    if (i < errorCnt) {\n      errorIndicators[i].className = 'fail active';\n    } else {\n      errorIndicators[i].className = 'fail';\n    }\n  }\n}\n/**\n * @param {string} text\n */\n\n\nfunction setQuestion(text) {\n  document.querySelector('.question').innerHTML = text;\n}\n\nmodule.exports = {\n  setAnswer,\n  fillAnswerField,\n  setPoints,\n  setErrors,\n  setQuestion\n};\n\n//# sourceURL=webpack:///./src/scripts/board.js?");
+
+/***/ }),
+
 /***/ "./src/scripts/main.js":
 /*!*****************************!*\
   !*** ./src/scripts/main.js ***!
@@ -94,19 +105,19 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ \"./src/scripts/utils.js\");\n\nconst baconEl = document.querySelector('.bacon');\nObject(_utils__WEBPACK_IMPORTED_MODULE_0__[\"GetBacon\"])().then(res => {\n  const markup = res.reduce((acc, val) => acc += `<p>${val}</p>`, '');\n  baconEl.innerHTML = markup;\n}).catch(err => baconEl.innerHTML = err);\n\n//# sourceURL=webpack:///./src/scripts/main.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _teams__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./teams */ \"./src/scripts/teams.js\");\n/* harmony import */ var _board__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./board */ \"./src/scripts/board.js\");\n/* harmony import */ var _board__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_board__WEBPACK_IMPORTED_MODULE_1__);\n\n\n_board__WEBPACK_IMPORTED_MODULE_1___default.a.setAnswer(1, '', 0);\n_board__WEBPACK_IMPORTED_MODULE_1___default.a.setAnswer(2, '', 0);\n_board__WEBPACK_IMPORTED_MODULE_1___default.a.setAnswer(3, '', 0);\n_board__WEBPACK_IMPORTED_MODULE_1___default.a.setAnswer(4, '', 0);\n_board__WEBPACK_IMPORTED_MODULE_1___default.a.setAnswer(5, '', 0);\n_board__WEBPACK_IMPORTED_MODULE_1___default.a.setAnswer(6, '', 0);\n_board__WEBPACK_IMPORTED_MODULE_1___default.a.setPoints(_teams__WEBPACK_IMPORTED_MODULE_0__[\"default\"].BLUE, 0);\n_board__WEBPACK_IMPORTED_MODULE_1___default.a.setPoints(_teams__WEBPACK_IMPORTED_MODULE_0__[\"default\"].RED, 0);\n_board__WEBPACK_IMPORTED_MODULE_1___default.a.setErrors(_teams__WEBPACK_IMPORTED_MODULE_0__[\"default\"].RED, 0);\n_board__WEBPACK_IMPORTED_MODULE_1___default.a.setErrors(_teams__WEBPACK_IMPORTED_MODULE_0__[\"default\"].BLUE, 0);\n_board__WEBPACK_IMPORTED_MODULE_1___default.a.setQuestion('Coding Dojo Silesia');\n\n//# sourceURL=webpack:///./src/scripts/main.js?");
 
 /***/ }),
 
-/***/ "./src/scripts/utils.js":
+/***/ "./src/scripts/teams.js":
 /*!******************************!*\
-  !*** ./src/scripts/utils.js ***!
+  !*** ./src/scripts/teams.js ***!
   \******************************/
-/*! exports provided: GetBacon */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"GetBacon\", function() { return GetBacon; });\nconst GetBacon = () => {\n  const body = fetch('https://baconipsum.com/api/?type=all-meat&paras=3').then(res => res.json());\n  return body;\n};\n\n//# sourceURL=webpack:///./src/scripts/utils.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/**\n * @enum {TEAMS}\n */\nconst TEAMS = {\n  BLUE: 'blue',\n  RED: 'red'\n};\n/* harmony default export */ __webpack_exports__[\"default\"] = (TEAMS);\n\n//# sourceURL=webpack:///./src/scripts/teams.js?");
 
 /***/ }),
 

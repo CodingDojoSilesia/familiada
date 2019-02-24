@@ -6,8 +6,7 @@
   "scripts": {
     "dev:assets": "webpack --watch",
     "dev:start": "live-server --open=./public/ --host=localhost --watch=./public/",
-    "dev": "npm-run-all -p dev:*",
-    "build": "cross-env NODE_ENV=production webpack"
+    "start": "npm-run-all -p dev:*"
   },
   "repository": {
     "type": "git",
@@ -25,7 +24,6 @@
     "babel-loader": "^8.0.5",
     "cross-env": "^5.2.0",
     "css-loader": "^2.1.0",
-    "cssnano": "^4.1.10",
     "file-loader": "^3.0.1",
     "live-server": "^1.2.1",
     "mini-css-extract-plugin": "^0.5.0",
@@ -36,5 +34,8 @@
     "sass-loader": "^7.1.0",
     "webpack": "^4.29.5",
     "webpack-cli": "^3.2.3"
+  },
+  "dependencies": {
+    "bootstrap": "^4.3.1"
   }
 }

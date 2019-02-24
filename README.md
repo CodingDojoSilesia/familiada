@@ -1,7 +1,7 @@
 Coding Dojo Silesia: Familiada Kata
 ===================================
 
-TODO BEFORE PUBLISHING:
+**TODO BEFORE PUBLISHING:**
 * change the repo name in package.json
 
 Welcome to A'th edition of Coding Dojo Silesia. Your task is to implement a simulation
@@ -34,5 +34,12 @@ Please read the whole description before you start working.
    * In both cases the round ends as well.
 
 ### The twist
+TODO: Describe the Web Speech API
 
 ### The manual
+#####Installation
+1. Be sure you have your node.js updated. The use of [n](https://github.com/tj/n) 
+   is advised. Just be sure to restart your terminal, should you change the node version.
+1. `npm install`
+1. `npm start`
+

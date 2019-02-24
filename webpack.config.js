@@ -90,6 +90,30 @@ module.exports = {
                         }
                     }
                 ]
+            },
+            {
+                test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            // The image will be named with the original name and
+                            // extension
+                            name: '[name].[ext]',
+                            // Indicates where the images are stored and will use
+                            // this path when generating the CSS files.
+                            // Example, in main.scss I have
+                            // url('../../public/assets/images/venice-italy.jpg')
+                            // and when generating the CSS file, it will be
+                            // outputted as url(../images/venice-italy.jpg), which
+                            // is relative to /styles/main.css
+                            publicPath: '../fonts',
+                            // When this option is 'true', the loader will emit
+                            // the image to output.path
+                            emitFile: false
+                        }
+                    }
+                ]
             }
         ]
     },
