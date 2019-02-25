@@ -6,6 +6,11 @@ const answerFieldFill = '... ... ... ... ... ... ... ... ... ... ... ... ...';
  * @param {int} points
  */
 function setAnswer(number, text, points) {
+    if (!document.querySelector(`[data-answer-num="${number}"]`)) {
+        throw new Error('The HTML for the answer does not exist, ' +
+            'make sure the question number you provided is in a 1-6 range');
+    }
+
     const textContainer = document.querySelector(`[data-answer-num="${number}"] .text`);
     const pointsContainer = document.querySelector(`[data-answer-num="${number}"] .points`);
 
@@ -21,7 +26,7 @@ function fillAnswerField(text) {
     const fillLength = answerFieldFill.length;
 
     if (fillLength < text.length) {
-        return text.substring(0, text.length - 3) + '...';
+        return text.substring(0, fillLength - 3) + '...';
     } else {
         return text + answerFieldFill.substring(text.length);
     }
@@ -32,6 +37,12 @@ function fillAnswerField(text) {
  * @param {int} points
  */
 function setPoints(team, points) {
+    const teamPointContainer = document.querySelector(`.${team}-team .team-points`);
+
+    if (!teamPointContainer) {
+        throw new Error('The HTML for the team you provided does not exist, you probably have a typo in a team name');
+    }
+
     document.querySelector(`.${team}-team .team-points`).innerHTML = points.toString();
 }
 
@@ -41,6 +52,10 @@ function setPoints(team, points) {
  */
 function setErrors(team, errorCnt) {
     const errorIndicators = document.querySelectorAll(`.${team}-team .fail`);
+
+    if (!errorIndicators.length) {
+        throw new Error('The HTML for the team you provided does not exist, you probably have a typo in a team name');
+    }
 
     for (let i = 0; i < errorIndicators.length; i++) {
         if (i < errorCnt) {

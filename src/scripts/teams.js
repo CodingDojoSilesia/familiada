@@ -6,4 +6,6 @@ const TEAMS = {
     RED: 'red'
 };
 
+Object.freeze(TEAMS);
+
 export default TEAMS;

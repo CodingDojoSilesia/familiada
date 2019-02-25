@@ -44,3 +44,9 @@ TODO: Describe the Web Speech API
 1. `npm install`
 1. `npm start`
 
+##### Entry point
+The main JS is [main.js](src/scripts/main.js) in the `src/scripts` directory.
+
+##### Testing
+Existing tests are using [Jest](https://jestjs.io), but you are allowed to
+use any testing framework, as long as you do write the tests ;)
