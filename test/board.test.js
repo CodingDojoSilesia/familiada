@@ -1,5 +1,5 @@
-import board from '../scripts/board';
-import TEAMS from "../scripts/teams";
+import board from '../src/scripts/board';
+import TEAMS from "../src/scripts/teams";
 
 describe('fillAnswerField', () => {
     test('returns the empty text placeholder when received empty string', () => {

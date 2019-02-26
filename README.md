@@ -35,7 +35,21 @@ Please read the whole description before you start working.
    * In both cases the round ends as well.
 
 ### The twist
-TODO: Describe the Web Speech API
+Just like a live show, the answers will be given vocally, To achieve the a 
+[Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API/Using_the_Web_Speech_API)
+will be used. Take note, that this API is only available on Google Chrome
+and Firefox, although we were not able to make it work in Firefox. Using the latest
+stable version of Google Chrome is strongly advised if you want to use this feature.
+Given that we don't want to force you to install a Google software on your machine, 
+this part if the task is serving as a twist for those interested and is not required.
+
+### The second twist
+As we know in Poland, this TV show cannot exist without some bad jokes ;) Should you
+find yourself with some additional time on your hands, consider throwing some cool
+dry joke at the start of the show using the awesome 
+[random-suchar-generator](https://www.npmjs.com/package/random-suchar-generator)
+written by an awesome member of our community and a mentor 
+[Arek](https://github.com/lazarow).
 
 ### The manual
 ##### Installation
@@ -50,3 +64,11 @@ The main JS is [main.js](src/scripts/main.js) in the `src/scripts` directory.
 ##### Testing
 Existing tests are using [Jest](https://jestjs.io), but you are allowed to
 use any testing framework, as long as you do write the tests ;)
+
+### Credits
+Thank you to [Arek](https://github.com/lazarow) for Web Speech API idea as well as
+the [generator](https://www.npmjs.com/package/random-suchar-generator).  
+
+Also, huge thanks to everyone involved in making this Dojo a possibility! Mentors, 
+organizers, and all the people discussing topic ideas with us and taking active part
+in our community. You know who you are ;)  
