@@ -51,6 +51,9 @@ dry joke at the start of the show using the awesome
 written by an awesome member of our community and a mentor 
 [Arek](https://github.com/lazarow).
 
+Because we're using the browser environment, you'll probably find using the
+[endpoint provided by us](http://suchary.dmazur.usermd.net/) easier to use.
+
 ### The manual
 ##### Installation
 1. Be sure you have your node.js updated. The use of [n](https://github.com/tj/n) 
