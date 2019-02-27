@@ -14,7 +14,7 @@ function setAnswer(number, text, points) {
     const textContainer = document.querySelector(`[data-answer-num="${number}"] .text`);
     const pointsContainer = document.querySelector(`[data-answer-num="${number}"] .points`);
 
-    textContainer.innerHTML = fillAnswerField(text);
+    textContainer.innerHTML = fillAnswerField(removeDiacritics(text));
     pointsContainer.innerHTML = points;
 }
 
@@ -70,7 +70,15 @@ function setErrors(team, errorCnt) {
  * @param {string} text
  */
 function setQuestion(text) {
-    document.querySelector('.question').innerHTML = text;
+    document.querySelector('.question').innerHTML = removeDiacritics(text);
+}
+
+/**
+ * @param {string} input
+ * @returns {string}
+ */
+function removeDiacritics(input) {
+    return input.replace(/\u0142/g, "l").normalize('NFKD').replace(/[^\w\s.-_\/]/g, '');
 }
 
 module.exports = {
@@ -79,4 +87,5 @@ module.exports = {
     setPoints,
     setErrors,
     setQuestion,
+    removeDiacritics,
 };

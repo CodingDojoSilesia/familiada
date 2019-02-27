@@ -108,3 +108,10 @@ describe('setQuestion', () => {
            .toBe('This replaces the question');
     });
 });
+
+describe('removeDiacritics', () => {
+    test('should remove Polish diacritics from text', () => {
+        let testInput = 'zażółć gęślą jaźń';
+        expect(board.removeDiacritics(testInput)).toBe('zazolc gesla jazn');
+    });
+});
