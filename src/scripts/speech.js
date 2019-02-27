@@ -6,7 +6,7 @@ let recognition = new SpeechRecognition();
 let speechRecognitionList = new SpeechGrammarList();
 
 function loadGrammar(words) {
-    let grammar = '#JSGF V1.0; grammar colors; public <color> = ' + words.join(' | ') + ' ;'
+    let grammar = `#JSGF V1.0; grammar colors; public <color> = ${words.join(' | ')} ;`
     speechRecognitionList.addFromString(grammar, 1);
     recognition.grammars = speechRecognitionList;
     recognition.lang = 'pl-PL';
