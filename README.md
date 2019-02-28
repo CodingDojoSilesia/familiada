@@ -1,9 +1,6 @@
 Coding Dojo Silesia: Familiada Kata
 ===================================
 
-**TODO BEFORE PUBLISHING:**
-* change the repo name in package.json
-
 Welcome to A'th edition of Coding Dojo Silesia. Your task is to implement a simulation
 of a [polish version of Family Feud TV game show](https://en.wikipedia.org/wiki/Familiada).
 We provided a simple boilerplate in ES with a HTML version of the interface, but you

@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/CodingDojoSilesia/familiada-node.git"
+    "url": "git+https://github.com/CodingDojoSilesia/familiada.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://gitlab.com/CodingDojoSilesia/familiada-node/issues"
+    "url": "https://github.com/CodingDojoSilesia/familiada/issues"
   },
-  "homepage": "https://gitlab.com/CodingDojoSilesia/familiada-node#README",
+  "homepage": "https://github.com/CodingDojoSilesia/familiada#README",
   "devDependencies": {
     "@babel/core": "^7.3.3",
     "@babel/preset-env": "^7.3.1",
