@@ -32,7 +32,7 @@ body.familiada {
   color: rgba(0, 0, 0, 0.15);
   font-size: 72px;
 
-  .active {
+  &.active {
     color: #c2d785;
     font-size: 72px;
   }
