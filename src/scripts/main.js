@@ -1,6 +1,7 @@
 import TEAMS from './teams'
 import board from './board';
 import speech from './speech';
+import { questions } from './../data.json';
 
 board.setAnswer(1, '', 0);
 board.setAnswer(2, '', 0);
