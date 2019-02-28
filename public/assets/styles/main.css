@@ -7330,7 +7330,7 @@ body.familiada {
 .fail {
   color: rgba(0, 0, 0, 0.15);
   font-size: 72px; }
-  .fail .active {
+  .fail.active {
     color: #c2d785;
     font-size: 72px; }
 
