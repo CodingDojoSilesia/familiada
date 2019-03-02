@@ -1,8 +1,8 @@
 class Answer {
-    constructor(ans, lp, points) {
-        this.ans = ans;
-        this.lp = lp;
-        this.points = points;
+    constructor(answer) {
+        this.ans = answer.ans;
+        this.lp = answer.lp;
+        this.points = answer.points;
     }
 }
 

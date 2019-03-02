@@ -4,14 +4,29 @@ class QuestionStore {
         this.questions = questions;
     }
 
+    parseQuestions() {
+        // return Object.values(this.questions);
+
+        for (let i = 0; i < Object.keys(questions).length; i++) {
+
+        }
+    }
+
     getRandomQuestion() {
+
+        const title = this.getRandomQuestionTitle();
         return true;
     }
 
-    getRandomQuestionNumber() {
-        const numberOfQuestions = Object.keys(this.questions).length;
+    getRandomQuestionTitle() {
+        const questionsTitles = Object.keys(this.questions);
+        const randomNumber = Math.floor(Math.random() * (Object.keys(this.questions).length - 1 + 1) + 1);
 
-        return Math.floor(Math.random() * (numberOfQuestions - 1 + 1) + 1);
+        return questionsTitles[randomNumber];
+    }
+    
+    getQuestions() {
+        return this.questions;
     }
 }
 
