@@ -12,4 +12,12 @@ export default class Team {
     addError() {
         this.errors += 1;
     }
+
+    getName() {
+        return this.name;
+    }
+
+    getErrors() {
+        return this.errors;
+    }
 }
