@@ -19,6 +19,14 @@ function setAnswer(number, text, points) {
 }
 
 /**
+ * @param {int} answerLp 
+ */
+function hideUnusedAnswerField(answerLp) {
+    const textContainer = document.querySelector(`[data-answer-num="${answerLp}"]`);
+    textContainer.setAttribute("style", "display: none");
+}   
+
+/**
  * @param {string} text
  * @returns {string}
  */
@@ -88,4 +96,5 @@ module.exports = {
     setErrors,
     setQuestion,
     removeDiacritics,
+    hideUnusedAnswerField,
 };
