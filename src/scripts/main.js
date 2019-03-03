@@ -26,6 +26,7 @@ board.setQuestion(game.getRound().getQuestion().getName());
 speech.loadGrammar(game.getRound().getQuestion().getAnswersWords());
 document.querySelector('.record').onclick = function() {
     speech.start().then((result) => {
+        
 
         const playerSpeechAnswer = result[0][0].transcript;
 
