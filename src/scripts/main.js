@@ -21,26 +21,14 @@ board.setErrors(TEAMS.RED, 0);
 board.setErrors(TEAMS.BLUE, 0);
 
 const game = new Game([new Team(TEAMS.BLUE), new Team(TEAMS.RED)], new QuestionStore(questions));
-board.setQuestion(game.getRound().getQuestion().getName());
+
+// DEBUG
+console.log(game.getRound().getQuestion().getAnswersWords());
 
 speech.loadGrammar(game.getRound().getQuestion().getAnswersWords());
 document.querySelector('.record').onclick = function() {
     speech.start().then((result) => {
-        
-
         const playerSpeechAnswer = result[0][0].transcript;
-
-        const answerForQuestion = game.getRound().getQuestion().getAnswers();
-
-        const playerAnswerResult = answerForQuestion.find(answer => {
-            return answer.ans.toLowerCase() === playerSpeechAnswer;
-        });
-
-        if (playerAnswerResult != undefined) {
-            board.setAnswer(playerAnswerResult.lp, playerAnswerResult.ans, playerAnswerResult.points);
-            return true;
-        }
-
-        board.setErrors(game.getTeam(), 1);
+        game.handlePlayerAnswer(playerSpeechAnswer);
     });
 };
