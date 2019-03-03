@@ -3,4 +3,17 @@ export default class Question {
         this.name = name;
         this.answers = answers.filter(answer => answer);
     }
+
+    getName() {
+        return this.name;
+    }
+
+    getAnswers() {
+        return this.answers;
+    }
+
+    getAnswersWords() {
+        return this.answers.map(answer => answer.ans);
+    }
+
 }
