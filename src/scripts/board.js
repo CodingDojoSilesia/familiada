@@ -23,7 +23,9 @@ function setAnswer(number, text, points) {
  */
 function hideUnusedAnswerField(answerLp) {
     const textContainer = document.querySelector(`[data-answer-num="${answerLp}"]`);
-    textContainer.setAttribute("style", "display: none");
+    if (textContainer) {
+        textContainer.setAttribute("style", "display: none");
+    }
 }   
 
 /**
