@@ -15,7 +15,7 @@ export default class QuestionStore {
         for (let i = 0; i < answers.length; i++) {
             const parsedAnswers = answers[i].filter(answer => answer).map(answer => new Answer(answer));
             parsedQuestions.push(new Question(titles[i], parsedAnswers));
-        }
+        }        
         return parsedQuestions;
     }
 
@@ -24,6 +24,6 @@ export default class QuestionStore {
     }
     
     getRandomQuestionId() {
-        return Math.floor(Math.random() * (this.questions.length - 1 + 1) + 1);
+        return Math.floor(Math.random() * (this.questions.length - 1 + 1) + 1) - 1;
     }
 }
