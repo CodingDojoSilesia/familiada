@@ -1,9 +1,19 @@
 import QuestionStore from '../src/scripts/model/questionStore';
-import { questions } from '../src/data.json';
 import Question from '../src/scripts/model/question';
 import Answer from '../src/scripts/model/answer';
 
 describe('testQuestionStore', () => {
+
+    const questions = { 'Atrybut świętego Mikołaja?': 
+        [ 
+            null,
+            { ans: 'Worek', lp: 1, points: 35 },
+            { ans: 'Czapka', lp: 2, points: 23 },
+            { ans: 'Broda', lp: 3, points: 20 },
+            { ans: 'Dzwonek', lp: 4, points: 8 },
+            { ans: 'Renifery', lp: 5, points: 7 } 
+        ]
+    };
 
     let questionsStore = null;
 
@@ -11,7 +21,7 @@ describe('testQuestionStore', () => {
         questionsStore = new QuestionStore(questions);
     });
 
-    test('testReturnRandomQuestion', () => {
+    test('testReturnRandomQuestionAnswers', () => {
         const randomQuestion = questionsStore.getRandomQuestion();
         const firstAnswersKeysFromRandomQuestion = Object.keys(randomQuestion.getAnswers()[0]);
 
@@ -22,7 +32,15 @@ describe('testQuestionStore', () => {
         expect(firstAnswersKeysFromRandomQuestion[1]).toBe('lp');
         expect(firstAnswersKeysFromRandomQuestion[2]).toBe('points');
     });
-    test('testReturnParsedArrayOfQuestions', () => {
 
+    test('testReturnRandomQuestionIndexWhenAddOneQuestion', () => {
+        expect(questionsStore.getRandomQuestionId()).toBe(0);
     });
+
+    test('testReturnRandomQuestionWhenAddOneQuestion', () => {
+        expect(questionsStore.getRandomQuestion().getName()).toBe('Atrybut świętego Mikołaja?');
+    });
+
+
+
 });
