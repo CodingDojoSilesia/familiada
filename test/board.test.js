@@ -115,3 +115,56 @@ describe('removeDiacritics', () => {
         expect(board.removeDiacritics(testInput)).toBe('zazolc gesla jazn');
     });
 });
+
+describe('removeUnusedAnswerFieldsForQuestion', () => {
+    test('should show one row for answer', () => {
+
+        document.body.innerHTML = `
+        <li data-answer-num="1">
+            <span class="number">1.</span>
+            <span class="text">This will change</span>
+            <span class="points">42</span>
+        </li>
+        <li data-answer-num="2">
+            <span class="number">2.</span>
+            <span class="text">This will not</span>
+            <span class="points">37</span>
+        </li>
+        `;
+
+        board.manageAnswerFields(1);
+
+        expect(document.querySelector('[data-answer-num="1"]') !== undefined)
+        .toBe(true);
+        expect(document.querySelector('[data-answer-num="2"]').style.display).toBe('none');
+    });
+});
+
+describe('clearBoard', () => {
+    test('should remove words from answer board rows', () => {
+        document.body.innerHTML = `
+        <li data-answer-num="1">
+            <span class="number">1.</span>
+            <span class="text">This will change</span>
+            <span class="points">42</span>
+        </li>
+        <li data-answer-num="2">
+            <span class="number">1.</span>
+            <span class="text">This will change</span>
+            <span class="points">42</span>
+        </li>`
+
+        board.clearBoard();
+        const elements = document.querySelectorAll('[data-answer-num]');
+
+        expect(elements.item(0).querySelector('span.text').innerHTML)
+        .toBe('... ... ... ... ... ... ... ... ... ... ... ... ...');
+        expect(elements.item(0).querySelector('span.points').innerHTML)
+        .toBe('0');
+
+        expect(elements.item(1).querySelector('span.text').innerHTML)
+        .toBe('... ... ... ... ... ... ... ... ... ... ... ... ...');
+        expect(elements.item(1).querySelector('span.points').innerHTML)
+        .toBe('0');
+    });
+});
