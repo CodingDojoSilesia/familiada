@@ -1,5 +1,4 @@
 import QuestionStore from '../src/scripts/model/questionStore';
-// import { questions } from '../src/data.json';
 import Question from '../src/scripts/model/question';
 import Answer from '../src/scripts/model/answer';
 import Game from '../src/scripts/model/game';
@@ -26,37 +25,34 @@ describe('testOnNewGame', () => {
 
     let game = null;
 
+    document.body.innerHTML = '<h3 class="question">This question should be replaced</h3>';
+
     beforeAll(() => {
         game = new Game([new Team(TEAMS.BLUE), new Team(TEAMS.RED)], new QuestionStore(questions));
     });
 
-    test('testCreatedNewGame', () => {
+    test('test created new game', () => {
         expect(typeof game).toBe('object');
     });
 
-    test('testFindGoodAnswerFromQuestionAswers', () => {
+    test('test find good answer from question aswers', () => {
         const result = game.resolvePlayerAnswer(playerSpeechAnswer[0].transcript);
-        expect(typeof result).toBe('object');
+        expect(result.status).toBe(true);
     });
 
-    test('testReturnFalseWhenAnswerIsBad', () => {
+    test('test return false when answer is bad', () => {
         const result = game.resolvePlayerAnswer('bledna odpowiedz');
-        expect(result).toBe(false);
+        expect(result.status).toBe(false);
     });
 
-    test('testSetRandomTeamAsCurrentWhenStartGame', () => {
+    test('test set random team as current when start game', () => {
         expect(Object.values(TEAMS).includes(game.getCurrentTeam().getName())).toBe(true);
     });
 
-    test('testSwitchCurrentTeamOnRound', () => {
-        
+    test('test switch current team on round', () => {
         const initialTeamName = game.getCurrentTeam().getName();
-
         game.switchCurrentTeam();
-        
         const changedTeamName = game.getCurrentTeam().getName();
-
         expect(initialTeamName === changedTeamName).toBe(false);
-
     });
 });
