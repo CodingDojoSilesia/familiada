@@ -16,40 +16,31 @@ export default class Game {
     }
 
     handlePlayerAnswer(playerAnswer) {
-        const result = this.resolvePlayerAnswer(playerAnswer);
-        
+        const answer = this.resolvePlayerAnswer(playerAnswer);
         const currentTeam = this.getCurrentTeam();
         
-        if (result &&
-            currentTeam.getErrors() < 3 &&
-            this.round.getStatus() === 'default'
-        ) {
-            this.round.setBoardAnswer(result);
-        } else {
-            currentTeam.addError();
-            this.round.setError(currentTeam);
+        switch(answer.status) { 
+            case 'goodAnswer': { 
+               this.round.setBoardAnswer(result, this);
+               break; 
+            } 
+            case 'badAnswer': { 
+               this.round.setBoardError(currentTeam, this);
+               break; 
+            }
+            default: { 
+               throw new Error('unresolved strategy!');
+            } 
         }
-
-        if (this.round.checkFinish()) {
-            // @TODO clear board, add points to team
-            this.round = new Round(this.questionsStore.getRandomQuestion());
-            return;
-        }
-        
-        if (currentTeam.getErrors() === 3) {
-            this.switchCurrentTeam();
-        }
-
-        return;
     }
 
     resolvePlayerAnswer(playerAnswer) {
 
-        const result =  this.getRound().getQuestion().getAnswers().find(answer => {
+        const answer =  this.getRound().getQuestion().getAnswers().find(answer => {
             return answer.ans.toLowerCase() === board.removeDiacritics(playerAnswer);
         });
 
-        return (result !== undefined) ? result : false;
+        return (answer !== undefined) ? { answer, status: true} : { answer: null, status: false};
     }
 
     switchCurrentTeam() {
