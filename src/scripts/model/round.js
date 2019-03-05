@@ -1,18 +1,19 @@
 import board from '../board';
 import Answer from './answer';
 import Team from './team';
+import Game from './game';
 /**
  * Manage current question and board
  */
 export default class Round {
 
     constructor(question) {
-        this.right = 0; // rozpoznanie kiedy konczy sie runda (wszystkie odpowiedzi ok, niezaleznie od druzyny)
+        this.right = 0;
         this.status = 'default';
         this.points = 0;
         this.question = question;
-        this.disableUnusedBoardRows();
         board.setQuestion(this.question.getName());
+        board.manageAnswerFields(this.getQuestion().getAnswers().length);
     }
 
     getQuestion() {
@@ -20,26 +21,27 @@ export default class Round {
     }
     /**
      * @param {Answer} answer 
+     * @param {Game} game
      */
-    setBoardAnswer(answer) {
+    setBoardAnswer(answer, game) {
         board.setAnswer(answer.lp, answer.ans, answer.points);
         this.right++; // all answers right! new Round! 
         this.points += answer.points;
+        // all answers good
+        if (this.checkFinish()) {
+            this.finishRound();
+            game.round = new Round(this.questionsStore.getRandomQuestion());
+        }
     }
     /**
      * @param {Team} team 
+     * @param {Game} game
      */
-    setError(team) {
+    setBoardError(team, game) {
+        team.addError()
         board.setErrors(team.getName(), team.getErrors());
-    }
-
-    /**
-     * Remove unused board answers fields for question on board
-     */
-    disableUnusedBoardRows() {
-        for (let i = 6; i > this.getQuestion().getAnswers().length; i--) { 
-            board.hideUnusedAnswerField(i);
-        }
+        if (team.getErrors() === 3) game.switchCurrentTeam();
+        // @TODO when question is stolen finish round!
     }
 
     getStatus() {
@@ -52,5 +54,15 @@ export default class Round {
 
     checkFinish() {
         return this.question.getAnswers().length === this.right;
+    }
+
+    finishRound(team) {
+        team.addPoints(this.round.points);
+        board.setPoints(team.getName(), this.round.points);
+        board.clearBoard();
+    }
+
+    getPoints () {
+        return this.points;
     }
 }
