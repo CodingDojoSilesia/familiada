@@ -19,12 +19,15 @@ function setAnswer(number, text, points) {
 }
 
 /**
- * @param {int} answerLp 
+ * Add display none to unused rows
+ * @param {int} answerLength 
  */
-function hideUnusedAnswerField(answerLp) {
-    const textContainer = document.querySelector(`[data-answer-num="${answerLp}"]`);
-    if (textContainer) {
-        textContainer.setAttribute("style", "display: none");
+function manageAnswerFields(answerLength) {
+    const rowFields = document.querySelectorAll(`[data-answer-num]`);
+    for (let i = 1; i <= 6; i++) { 
+        if (i > answerLength && rowFields.item(i - 1) !== null) {
+            rowFields.item(i - 1).style.display = 'none';
+        }
     }
 }   
 
@@ -91,6 +94,18 @@ function removeDiacritics(input) {
     return input.replace(/\u0142/g, "l").normalize('NFKD').replace(/[^\w\s.-_\/]/g, '');
 }
 
+/**
+ * Clear game board
+ */
+function clearBoard() {
+    const elements = document.querySelectorAll('[data-answer-num]');
+
+    for(let i = 0; i < elements.length; i++) {
+        elements.item(i).querySelector('span.text').innerHTML = answerFieldFill;
+        elements.item(i).querySelector('span.points').innerHTML = '0';
+    }
+}
+
 module.exports = {
     setAnswer,
     fillAnswerField,
@@ -98,5 +113,6 @@ module.exports = {
     setErrors,
     setQuestion,
     removeDiacritics,
-    hideUnusedAnswerField,
+    manageAnswerFields,
+    clearBoard
 };
