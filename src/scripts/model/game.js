@@ -42,7 +42,9 @@ export default class Game {
             } 
         }
     }
-
+    /**
+     * @param {string} playerAnswer 
+     */
     resolvePlayerAnswer(playerAnswer) {
 
         const answer = this.round.getQuestion().getAnswers().find(answer => {
