@@ -156,4 +156,32 @@ describe('testTeamAnswersForQuestion', () => {
         game.handlePlayerAnswer('dzwonek');
         game.handlePlayerAnswer('renifery');
     });
+
+    test('double points when is fourth round', () => {
+
+        game.roundCount = 4;
+        const startedTeam = game.getCurrentTeam();
+
+        game.handlePlayerAnswer('worek');
+        game.handlePlayerAnswer('czapka');
+        game.handlePlayerAnswer('broda');
+        game.handlePlayerAnswer('dzwonek');
+        game.handlePlayerAnswer('renifery');
+
+        expect(startedTeam.getPoints()).toBe(186);
+    });
+
+    test('multiple by 3 points when is fifth round', () => {
+
+        game.roundCount = 5;
+        const startedTeam = game.getCurrentTeam();
+
+        game.handlePlayerAnswer('worek');
+        game.handlePlayerAnswer('czapka');
+        game.handlePlayerAnswer('broda');
+        game.handlePlayerAnswer('dzwonek');
+        game.handlePlayerAnswer('renifery');
+
+        expect(startedTeam.getPoints()).toBe(279);
+    });
 });
