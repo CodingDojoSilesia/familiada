@@ -59,8 +59,8 @@ export default class Round {
      */
     finishRound(game) {
 
-        if(game.getRoundCount() === 4) this.points * 2;
-        if(game.getRoundCount() === 5) this.points * 3;
+        if(game.getRoundCount() === 4) this.points *= 2;
+        if(game.getRoundCount() === 5) this.points *= 3;
 
         game.getCurrentTeam().addPoints(this.points);
         board.setPoints(game.getCurrentTeam().getName(), this.points);
