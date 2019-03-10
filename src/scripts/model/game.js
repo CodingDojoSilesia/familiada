@@ -1,5 +1,4 @@
 import Round from "./round";
-import TEAMS from '../teams';
 import board from '../board';
 
 export default class Game {
@@ -18,9 +17,15 @@ export default class Game {
 
     startNewRound() {
         this.switchCurrentTeam();
+        this.resetTeamsErrors();
         this.roundCount++;
         this.round = new Round(this.questionsStore.getRandomQuestion());
     }
+
+    resetTeamsErrors() {
+        for(let team of this.teams) { team.resetErrors() }
+    }
+
     /**
      * @param {string} playerAnswer 
      */
