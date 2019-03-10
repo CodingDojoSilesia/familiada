@@ -11,36 +11,49 @@ export default class Game {
     constructor(teams, questionsStore) {
         this.teams = teams;
         this.questionsStore = questionsStore;
+        this.roundCount = 0;
         this.round = new Round(this.questionsStore.getRandomQuestion());
         this.setRandomTeam();
     }
 
+    startNewRound() {
+        this.switchCurrentTeam();
+        this.roundCount++;
+        this.round = new Round(this.questionsStore.getRandomQuestion());
+    }
+    /**
+     * @param {string} playerAnswer 
+     */
     handlePlayerAnswer(playerAnswer) {
-        const answer = this.resolvePlayerAnswer(playerAnswer);
+        const result = this.resolvePlayerAnswer(playerAnswer);
         const currentTeam = this.getCurrentTeam();
-        
-        switch(answer.status) { 
-            case 'goodAnswer': { 
-               this.round.setBoardAnswer(result, this);
+
+        switch(result.status) { 
+            case true: { 
+               this.round.setBoardAnswer(result.answer, this);
                break; 
             } 
-            case 'badAnswer': { 
+            case false: { 
                this.round.setBoardError(currentTeam, this);
                break; 
             }
             default: { 
-               throw new Error('unresolved strategy!');
+               throw new Error('Result have only true of false status');
             } 
         }
     }
 
     resolvePlayerAnswer(playerAnswer) {
 
-        const answer =  this.getRound().getQuestion().getAnswers().find(answer => {
+        const answer = this.round.getQuestion().getAnswers().find(answer => {
             return answer.ans.toLowerCase() === board.removeDiacritics(playerAnswer);
         });
 
         return (answer !== undefined) ? { answer, status: true} : { answer: null, status: false};
+    }
+
+    getQuestionsStore() {
+        return this.questionsStore;
     }
 
     switchCurrentTeam() {
