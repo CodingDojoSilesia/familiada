@@ -27,6 +27,8 @@ function manageAnswerFields(answerLength) {
     for (let i = 1; i <= 6; i++) { 
         if (i > answerLength && rowFields.item(i - 1) !== null) {
             rowFields.item(i - 1).style.display = 'none';
+        } else {
+            rowFields.item(i - 1).style.display = 'block';
         }
     }
 }   
@@ -104,6 +106,9 @@ function clearBoard() {
         elements.item(i).querySelector('span.text').innerHTML = answerFieldFill;
         elements.item(i).querySelector('span.points').innerHTML = '0';
     }
+
+    this.setErrors('blue', 0);
+    this.setErrors('red', 0);
 }
 /**
  * @param {string} teamName 
