@@ -1,18 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Familiada</title>
-    <link rel="stylesheet" href="./assets/styles/main.css">
-</head>
-
+export const exampleDomDocument = `
 <body class="familiada first-part">
 <div class="container">
     <div class="row">
         <div class="col-lg-2 text-center blue-team team">
-            <h4 class="name">Phpowcy</h4>
+            <h4 class="name">NIEBIESCY</h4>
             <div class="fail">X</div>
             <div class="fail">X</div>
             <div class="fail">X</div>
@@ -53,14 +44,11 @@
                     <span class="points">8</span>
                 </li>
             </ul>
-            <div class="recordPanel">
-                <button id="recordButton" class='notRec'></button>
-                <h4 class="record">Nagraj!</h4>
-            </div>
+            <h4 class="record">Nagraj!</h4>
             <h3 class="winner"></h3>
         </div>
         <div class="col-lg-2 text-center red-team team">
-            <h4 class="name">JavaScriptowcy</h4>
+            <h4 class="name">CZERWONI</h4>
             <div class="fail">X</div>
             <div class="fail">X</div>
             <div class="fail">X</div>
@@ -70,5 +58,4 @@
 </div>
 
 <script src="./assets/scripts/bundle.js"></script>
-</body>
-</html>
+</body>`

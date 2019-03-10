@@ -19,6 +19,21 @@ function setAnswer(number, text, points) {
 }
 
 /**
+ * Add display none to unused rows
+ * @param {int} answerLength 
+ */
+function manageAnswerFields(answerLength) {
+    const rowFields = document.querySelectorAll(`[data-answer-num]`);
+    for (let i = 1; i <= 6; i++) { 
+        if (i > answerLength && rowFields.item(i - 1) !== null) {
+            rowFields.item(i - 1).style.display = 'none';
+        } else {
+            rowFields.item(i - 1).style.display = 'block';
+        }
+    }
+}   
+
+/**
  * @param {string} text
  * @returns {string}
  */
@@ -81,6 +96,36 @@ function removeDiacritics(input) {
     return input.replace(/\u0142/g, "l").normalize('NFKD').replace(/[^\w\s.-_\/]/g, '');
 }
 
+/**
+ * Clear game board
+ */
+function clearBoard() {
+    const elements = document.querySelectorAll('[data-answer-num]');
+
+    for(let i = 0; i < elements.length; i++) {
+        elements.item(i).querySelector('span.text').innerHTML = answerFieldFill;
+        elements.item(i).querySelector('span.points').innerHTML = '0';
+    }
+
+    this.setErrors('blue', 0);
+    this.setErrors('red', 0);
+}
+/**
+ * @param {string} teamName 
+ */
+function finishGame(teamName) {
+    const winner = document.querySelector('.winner');
+    winner.innerHTML = `Wygrala druzyna ${teamName}`;
+    winner.style.display = 'block';
+}
+/**
+ * @param {string} status 
+ */
+function recordButton(status) {
+    const button = document.querySelector('#recordButton');
+    (status === 'start') ? button.className = 'rec' : button.className = 'notRec'; 
+}
+
 module.exports = {
     setAnswer,
     fillAnswerField,
@@ -88,4 +133,8 @@ module.exports = {
     setErrors,
     setQuestion,
     removeDiacritics,
+    manageAnswerFields,
+    clearBoard,
+    finishGame,
+    recordButton
 };

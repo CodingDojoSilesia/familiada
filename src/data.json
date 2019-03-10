@@ -1,21 +1,4 @@
 {
-  "actual" : {
-    "ans" : [ {
-      "lp" : 1
-    }, {
-      "ans" : "Owoce",
-      "lp" : 2,
-      "points" : 19
-    }, {
-      "lp" : 3
-    }, {
-      "lp" : 4
-    }, {
-      "lp" : 5
-    } ],
-    "team1" : 0,
-    "team2" : 2
-  },
   "questions" : {
     "Atrybut świętego Mikołaja?" : [ null, {
       "ans" : "Worek",
