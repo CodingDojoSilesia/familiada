@@ -13,6 +13,10 @@ export default class Team {
         this.errors += 1;
     }
 
+    resetErrors() {
+        this.errors = 0;
+    }
+
     getName() {
         return this.name;
     }
