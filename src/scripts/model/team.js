@@ -20,4 +20,8 @@ export default class Team {
     getErrors() {
         return this.errors;
     }
+
+    getPoints() {
+        return this.points;
+    }
 }
