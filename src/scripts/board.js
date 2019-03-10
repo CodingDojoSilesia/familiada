@@ -105,6 +105,21 @@ function clearBoard() {
         elements.item(i).querySelector('span.points').innerHTML = '0';
     }
 }
+/**
+ * @param {string} teamName 
+ */
+function finishGame(teamName) {
+    const winner = document.querySelector('.winner');
+    winner.innerHTML = `Wygrala druzyna ${teamName}`;
+    winner.style.display = 'block';
+}
+/**
+ * @param {string} status 
+ */
+function recordButton(status) {
+    const button = document.querySelector('#recordButton');
+    (status === 'start') ? button.className = 'rec' : button.className = 'notRec'; 
+}
 
 module.exports = {
     setAnswer,
@@ -114,5 +129,7 @@ module.exports = {
     setQuestion,
     removeDiacritics,
     manageAnswerFields,
-    clearBoard
+    clearBoard,
+    finishGame,
+    recordButton
 };
