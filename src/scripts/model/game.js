@@ -11,7 +11,7 @@ export default class Game {
     constructor(teams, questionsStore) {
         this.teams = teams;
         this.questionsStore = questionsStore;
-        this.roundCount = 0;
+        this.roundCount = 1;
         this.round = new Round(this.questionsStore.getRandomQuestion());
         this.setRandomTeam();
     }
@@ -78,5 +78,9 @@ export default class Game {
 
     getTeams() {
         return this.teams;
+    }
+
+    getRoundCount() {
+        return this.roundCount;
     }
 }
