@@ -1,11 +1,11 @@
 import QuestionStore from '../src/scripts/model/questionStore';
-import Question from '../src/scripts/model/question';
-import Answer from '../src/scripts/model/answer';
 import Game from '../src/scripts/model/game';
 import Team from '../src/scripts/model/team';
 import TEAMS from '../src/scripts/teams';
+import { exampleDomDocument } from './documentForTests';
+import ROUND_STATUS from '../src/scripts/roundStatus';
 
-describe('testOnNewGame', () => {
+describe('testsOnNewGame', () => {
 
     const questions = { 'Atrybut świętego Mikołaja?': 
         [ 
@@ -35,7 +35,7 @@ describe('testOnNewGame', () => {
         expect(typeof game).toBe('object');
     });
 
-    test('test find good answer from question aswers', () => {
+    test('test find good answer from question answers', () => {
         const result = game.resolvePlayerAnswer(playerSpeechAnswer[0].transcript);
         expect(result.status).toBe(true);
     });
@@ -54,5 +54,106 @@ describe('testOnNewGame', () => {
         game.switchCurrentTeam();
         const changedTeamName = game.getCurrentTeam().getName();
         expect(initialTeamName === changedTeamName).toBe(false);
+    });
+});
+
+
+describe('testTeamAnswersForQuestion', () => {
+
+    let game;
+
+    beforeEach(() => {
+
+        const questions = { 'Atrybut świętego Mikołaja?': 
+            [ 
+                null,
+                { ans: 'Worek', lp: 1, points: 35 },
+                { ans: 'Czapka', lp: 2, points: 23 },
+                { ans: 'Broda', lp: 3, points: 20 },
+                { ans: 'Dzwonek', lp: 4, points: 8 },
+                { ans: 'Renifery', lp: 5, points: 7 } 
+            ]
+        };
+
+        game = new Game([new Team(TEAMS.BLUE), new Team(TEAMS.RED)], new QuestionStore(questions));
+
+        document.body.innerHTML = exampleDomDocument;
+    });
+
+    test('team should win round when all answers are good', () => {
+        const startedTeam = game.getCurrentTeam();
+
+        game.handlePlayerAnswer('worek');
+        game.handlePlayerAnswer('czapka');
+        game.handlePlayerAnswer('broda');
+        game.handlePlayerAnswer('dzwonek');
+        game.handlePlayerAnswer('renifery');
+
+        const teamAfterAnswers = game.getCurrentTeam();
+
+        expect(startedTeam.getName() === teamAfterAnswers.getName()).toBe(false);
+        expect(startedTeam.getPoints()).toBe(93);
+    });
+
+    test('question move to second question after 3 bad answers', () => {
+
+        const startedTeam = game.getCurrentTeam();
+
+        game.handlePlayerAnswer('bledna odpowiedz');
+        game.handlePlayerAnswer('bledna odpowiedz');
+        game.handlePlayerAnswer('bledna odpowiedz');
+
+        const teamAfterAnswers = game.getCurrentTeam();
+
+        expect(startedTeam.getName() === teamAfterAnswers.getName()).toBe(false);
+        expect(startedTeam.getPoints()).toBe(0);
+        expect(game.getRound().getStatus()).toBe(ROUND_STATUS.STOLEN);
+
+    });
+
+    test('test question move to second team and this team answers properly', () => {
+
+        const startedTeam = game.getCurrentTeam();
+
+        game.handlePlayerAnswer('worek');
+        game.handlePlayerAnswer('bledna odpowiedz');
+        game.handlePlayerAnswer('bledna odpowiedz');
+        game.handlePlayerAnswer('bledna odpowiedz');
+
+        const teamAfterAnswers = game.getCurrentTeam();
+
+        expect(startedTeam.getName() === teamAfterAnswers.getName()).toBe(false);
+        expect(startedTeam.getPoints()).toBe(0);
+        expect(game.getRound().getStatus()).toBe(ROUND_STATUS.STOLEN);
+
+        game.handlePlayerAnswer('czapka');
+
+        expect(teamAfterAnswers.getPoints()).toBe(58);
+    });
+
+    test('test question move to second team and this team answers bad', () => {
+
+        const startedTeam = game.getCurrentTeam();
+
+        game.handlePlayerAnswer('worek');
+        game.handlePlayerAnswer('czapka');
+        game.handlePlayerAnswer('bledna odpowiedz');
+        game.handlePlayerAnswer('bledna odpowiedz');
+        game.handlePlayerAnswer('bledna odpowiedz');
+        game.handlePlayerAnswer('bledna odpowiedz');
+
+        expect(startedTeam.getPoints()).toBe(58);
+    });
+
+    test('finish game when has at least 400 points', () => {
+
+        const startedTeam = game.getCurrentTeam();
+        startedTeam.addPoints(380);
+
+        game.handlePlayerAnswer('worek');
+        game.handlePlayerAnswer('czapka');
+        game.handlePlayerAnswer('broda');
+        game.handlePlayerAnswer('dzwonek');
+        game.handlePlayerAnswer('renifery');
     });
 });
