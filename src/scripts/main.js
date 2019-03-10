@@ -6,7 +6,6 @@ import Game from './model/game';
 import Team from './model/team';
 import QuestionStore from './model/questionStore';
 
-
 board.setAnswer(1, '', 0);
 board.setAnswer(2, '', 0);
 board.setAnswer(3, '', 0);
@@ -22,13 +21,11 @@ board.setErrors(TEAMS.BLUE, 0);
 
 const game = new Game([new Team(TEAMS.BLUE), new Team(TEAMS.RED)], new QuestionStore(questions));
 
-// DEBUG
-console.log(game.getRound().getQuestion().getAnswersWords());
-
 speech.loadGrammar(game.getRound().getQuestion().getAnswersWords());
 document.querySelector('.record').onclick = function() {
+    board.recordButton('start');
     speech.start().then((result) => {
-        const playerSpeechAnswer = result[0][0].transcript;
-        game.handlePlayerAnswer(playerSpeechAnswer);
+        game.handlePlayerAnswer(result[0][0].transcript);
+        board.recordButton('stop');
     });
 };
