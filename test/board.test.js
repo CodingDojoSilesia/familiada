@@ -168,3 +168,12 @@ describe('clearBoard', () => {
         .toBe('0');
     });
 });
+
+describe('finishGame', () => {
+    test('show winner team name on board', () => {
+        document.body.innerHTML = `<h3 class="winner"></h3>`
+        board.finishGame(TEAMS.BLUE); 
+        const winnerElement = document.querySelector('.winner');
+        expect(winnerElement.innerHTML).toBe(`Wygrala druzyna ${TEAMS.BLUE}`)
+    });
+});
