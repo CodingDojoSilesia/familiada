@@ -1,6 +1,4 @@
 import QuestionStore from '../src/scripts/model/questionStore';
-import Question from '../src/scripts/model/question';
-import Answer from '../src/scripts/model/answer';
 
 describe('testQuestionStore', () => {
 
@@ -21,7 +19,7 @@ describe('testQuestionStore', () => {
         questionsStore = new QuestionStore(questions);
     });
 
-    test('testReturnRandomQuestionAnswers', () => {
+    test('test return random question answers', () => {
         const randomQuestion = questionsStore.getRandomQuestion();
         const firstAnswersKeysFromRandomQuestion = Object.keys(randomQuestion.getAnswers()[0]);
 
@@ -33,14 +31,11 @@ describe('testQuestionStore', () => {
         expect(firstAnswersKeysFromRandomQuestion[2]).toBe('points');
     });
 
-    test('testReturnRandomQuestionIndexWhenAddOneQuestion', () => {
+    test('test return random question index when add one question', () => {
         expect(questionsStore.getRandomQuestionId()).toBe(0);
     });
 
-    test('testReturnRandomQuestionWhenAddOneQuestion', () => {
+    test('testr return random question when add one question', () => {
         expect(questionsStore.getRandomQuestion().getName()).toBe('Atrybut świętego Mikołaja?');
     });
-
-
-
 });
